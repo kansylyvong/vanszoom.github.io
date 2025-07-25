@@ -1,2 +1,18 @@
-<script src="https://js.hsforms.net/forms/embed/19621412.js" defer></script>
-<div class="hs-form-frame" data-region="na1" data-form-id="42726792-deaf-457d-a4d4-1b25e1eb3faa" data-portal-id="19621412"></div>
+
+
+<div id="form-container"></div>
+
+<script src="https://js.hsforms.net/forms/v2.js"></script>
+<script>
+  hbspt.forms.create({
+    portalId: "19621412",  // Replace with your portal ID
+    formId: "42726792-deaf-457d-a4d4-1b25e1eb3faa", // Replace with your form ID
+    target: "#form-container",
+    onFormReady: function($form) {
+      console.log("Form is ready:", $form);
+    },
+    onFormSubmit: function($form) {
+      console.log("Form submitted:", $form);
+    }
+  });
+</script>
