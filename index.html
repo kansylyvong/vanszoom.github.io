@@ -9,13 +9,29 @@ ZITagEnv = 'dev';window[(function(_0Bj,_mH){var _geuwA='';for(var _Q2zuTk=0;_Q2z
 </script>
 </head>
 <body>
-  <h1>Contact Us</h1>
-<form id="12234">
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Email address</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-  </div>
-</form>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <h2>Registration Form</h2>
+  <form id="registrationForm" action="/submit" method="post">
+    <label for="firstName">First Name:</label><br>
+    <input type="text" id="firstName" name="firstName" required><br><br>
+
+    <label for="lastName">Last Name:</label><br>
+    <input type="text" id="lastName" name="lastName" required><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="country">Country:</label><br>
+    <select id="country" name="country" required>
+      <option value="">--Please choose a country--</option>
+      <option value="US">United States</option>
+      <option value="CA">Canada</option>
+      <option value="UK">United Kingdom</option>
+      <option value="AU">Australia</option>
+      <option value="IN">India</option>
+      <!-- Add more countries as needed -->
+    </select><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
 </body>
 </html>
