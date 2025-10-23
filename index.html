@@ -21,41 +21,31 @@ ZITagEnv = 'dev';window[(function(_0Bj,_mH){var _geuwA='';for(var _Q2zuTk=0;_Q2z
 <body>
   <h2>Registration Form</h2>
   <form id="registrationForm" action="/submit" method="post">
-      <div name="test">
-          <div contenteditable="true" style="border: 1px solid #ccc; padding: 10px; min-height: 50px;" data-field-name="test"> 
-              
-          </div>
+      <div>
+        <label for="firstName">First Name:</label><br>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+    </div>
+      <div>
+        <label for="lastName">Last Name:</label><br>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+    </div>
+      <div>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
       </div>
-            <div name="testName">
-          <div contenteditable="true" style="border: 1px solid #ccc; padding: 10px; min-height: 50px;" data-field-name="testName"> 
-              
-          </div>
-      </div>
-            <div name="testLast">
-          <div contenteditable="true" style="border: 1px solid #ccc; padding: 10px; min-height: 50px;" data-field-name="testLast"> 
-              
-          </div>
-      </div>
-    <label for="firstName">First Name:</label><br>
-    <input type="text" id="firstName" name="firstName" required><br><br>
 
-    <label for="lastName">Last Name:</label><br>
-    <input type="text" id="lastName" name="lastName" required><br><br>
-
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
-
-    <label for="country">Country:</label><br>
-    <select id="country" name="country" required>
-      <option value="">--Please choose a country--</option>
-      <option value="US">United States</option>
-      <option value="CA">Canada</option>
-      <option value="UK">United Kingdom</option>
-      <option value="AU">Australia</option>
-      <option value="IN">India</option>
-      <!-- Add more countries as needed -->
-    </select><br><br>
-
+      <div>
+        <label for="country">Country:</label><br>
+        <select id="country" name="country" required>
+          <option value="">--Please choose a country--</option>
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="UK">United Kingdom</option>
+          <option value="AU">Australia</option>
+          <option value="IN">India</option>
+          <!-- Add more countries as needed -->
+        </select><br><br>
+    </div>
     <button type="submit">Submit</button>
   </form>
 </body>
