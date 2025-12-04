@@ -4,9 +4,250 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-	<script type="text/javascript">
+<script>
 /* FormComplete Snippet - Form Shortening Utility Logic Script */
-window._zi_fc=window._zi_fc||{},window._zi_fc.utility=window._zi_fc.utility||{},window._zi_fc.utility.formShortening=function(){var n="FormComplete utility script encountered an error.";try{var i=window._zi_fc.onReady;window._zi_fc.onReady=function(n){"function"==typeof i&&i.bind(this)(n),window._zi_fc.utility.formShortening.onReady(n)};var t=window.location.origin+window.location.pathname}catch(i){console.error(n,i)}function o(){var n=[document];return document.querySelectorAll('iframe:not([src]), iframe[src=""]').forEach((function(i){n.push(i.contentDocument||i.contentWindow.document)})),n}function e(i,t,o){try{var e=document.createElement("style");return e.id="ziFormShortening"+Math.floor(1e4+99999*Math.random()),e.dataset.formSelector=i,i&&!Array.isArray(o)?(e.innerHTML=`${i} .fc-initial-hide {display:none !important}`,e):i&&Array.isArray(o)?(o.forEach((function(n){t&&(e.innerHTML+=`\n\t${i} ${t}:has(input[name="${n}"]),\n\t${i} ${t}:has(select[name="${n}"]),`),e.innerHTML+=`\n\t${i} [name="${n}"] {display:none !important}`})),e):(e.innerHTML=".fc-initial-hide {display:none !important}",e)}catch(i){console.error(n,i)}}function r(n){return Math.floor(n/10)/100+" seconds since page load."}return{version:8,set:function(i,t){if(window._zi_fc.utility.formShortening.settings=window._zi_fc.utility.formShortening.settings||{},window._zi_fc.utility.formShortening.settings.defaultConfig=window._zi_fc.utility.formShortening.settings.defaultConfig||{},window._zi_fc.utility.formShortening.settings.pageConfig=window._zi_fc.utility.formShortening.settings.pageConfig||{},"defaultConfig"==i)window._zi_fc.utility.formShortening.settings[i]=t;else{if("*"!=i)try{var o=new URL(i);i=o.origin+o.pathname}catch(i){console.error(n,"Ensure the rule is either 'defaultConfig', '*', or a valid URL.")}window._zi_fc.utility.formShortening.settings.pageConfig[i]=window._zi_fc.utility.formShortening.settings.pageConfig[i]||[],window._zi_fc.utility.formShortening.settings.pageConfig[i].push(t)}},init:function(){try{for(var[i,f]of Object.entries(window._zi_fc.utility.formShortening.settings.pageConfig))"*"!==i&&i!==t||f.forEach((function(n){var{fieldNames:i,fieldColumnSelector:t,formSelector:f,fallbackTimeout:c}=Object.assign({},window._zi_fc.utility.formShortening.settings.defaultConfig,n);c=c||4e3,window._zi_fc.utility.formShortening.debug[f]={},window._zi_fc.utility.formShortening.debug[f].initialized=r(performance.now()),o().forEach((function(n){var o=e(f,t,i);n.head.appendChild(o),setTimeout((function(){var i=n.getElementById(o.id);i&&(window._zi_fc.utility.formShortening.debug[i.dataset.formSelector].clearedByTimeoutAt=r(performance.now()),i.parentNode.removeChild(i))}),c)}))}))}catch(i){console.error(n,i)}},onReady:function(i){try{if(formSelectorMatch=!1,window._zi_fc.utility.formShortening.settings){var e=Array.from(new Set([window._zi_fc.utility.formShortening.settings.defaultConfig.formSelector,...(window._zi_fc.utility.formShortening.settings.pageConfig[t]||[]).map((function(n){return n.formSelector})),...(window._zi_fc.utility.formShortening.settings.pageConfig["*"]||[]).map((function(n){return n.formSelector}))].filter((function(n){return void 0!==n}))));o().forEach((function(n){if(n){var t=n.querySelector(i.formSelector);t&&e.forEach((function(i){if(n.querySelector(i)==t){formSelectorMatch=!0;var o=n.querySelector('style[data-form-selector="'+i+'"]');o&&(o.parentNode.removeChild(o),window._zi_fc.utility.formShortening.debug[i].clearedByReadyAt=r(performance.now()))}}))}}))}!1===formSelectorMatch&&(console.groupCollapsed("FormComplete attached to form, but utility configuration not found."),console.info(`\nExample configurations:\n\n\n// Default configurations.\nwindow._zi_fc.utility.formShortening.set('defaultConfig', {\n   'fieldColumnSelector': '',\n   'fallbackTimeout': 4000,\n});\n\n// Page & Form Specific configurations.\nwindow._zi_fc.utility.formShortening.set('${t}', {\n   'formSelector': "${i.formSelector}",\n   'fieldNames': [${i.inputs.map((function(n){return n.match(/\[name=['"]([^'"]*)['"]\]/)[1]})).map((function(n){return`'${n}'`})).join(", ")}],\n});\n\n// Initialize utility script.\nwindow._zi_fc.utility.formShortening.init();\n\n\nYou may replace the URL with '*' to allow the configuration to apply to any URL.\nYou may also want to define 'fieldColumnSelector' and change the 'fallbackTimeout' settings to ensure enough time for FormComplete to attach to the form.\n\t\t\t\t\n`),console.groupEnd())}catch(i){console.error(n,i)}},debug:{}}}();
+window._zi_fc = window._zi_fc || {};
+window._zi_fc.utility = window._zi_fc.utility || {};
+window._zi_fc.utility.formShortening = (function() {
+	
+	/* Define console error message. */
+	var messageError = 'FormComplete utility script encountered an error.';
+
+	try {
+		
+		/* Store copy of onReady callback, if defined. */
+		var onReadyCopy = window._zi_fc.onReady;
+		
+		/* Define new onReady callback to pass data to utility script. */
+		window._zi_fc.onReady = function(data) {
+			if (typeof onReadyCopy === 'function') {onReadyCopy.bind(this)(data)}
+			window._zi_fc.utility.formShortening.onReady(data)
+		};
+
+		/* Get current page URL domain + path. */
+		var currentUrl = window.location.origin + window.location.pathname;
+
+	} catch (e) {console.error(messageError, e)}
+	
+	function getContext() {
+		
+		var contexts = [document];
+		document.querySelectorAll('iframe:not([src]), iframe[src=""]').forEach(function(iframeNode){
+			contexts.push(iframeNode.contentDocument || iframeNode.contentWindow.document)
+		});
+		
+		return contexts;
+		
+	}
+
+	function set(rule, settings) {
+
+		/* Define object to hold configurations if not defined. */
+		window._zi_fc.utility.formShortening.settings = window._zi_fc.utility.formShortening.settings || {};
+		window._zi_fc.utility.formShortening.settings.defaultConfig = window._zi_fc.utility.formShortening.settings.defaultConfig || {};
+		window._zi_fc.utility.formShortening.settings.pageConfig = window._zi_fc.utility.formShortening.settings.pageConfig || {};
+
+		/* Store settings. */
+		if (rule == 'defaultConfig') {window._zi_fc.utility.formShortening.settings[rule] = settings}
+		else {
+			
+			/* Normalize URL for later comparison. */
+			if (rule != '*') {
+				try {
+					var url = new URL(rule);
+					rule = url.origin + url.pathname;
+				} catch (e) {console.error(messageError, "Ensure the rule is either 'defaultConfig', '*', or a valid URL.")}
+			}
+			
+			/* Define rule if not defined and push settings. */
+			window._zi_fc.utility.formShortening.settings.pageConfig[rule] = window._zi_fc.utility.formShortening.settings.pageConfig[rule] || [];
+			window._zi_fc.utility.formShortening.settings.pageConfig[rule].push(settings);
+
+		}
+
+	}
+
+	function init() {
+		
+		try {
+
+			/* Extract URL and configurations for each non-default config set. */
+			for (var [url, configs] of Object.entries(window._zi_fc.utility.formShortening.settings.pageConfig)) {
+				if (url === '*' || url === currentUrl) {
+					configs.forEach(function(config) {
+
+						/* Assign variables from default and page configurations. */
+						var { fieldNames, fieldColumnSelector, formSelector, fallbackTimeout } = Object.assign({}, window._zi_fc.utility.formShortening.settings.defaultConfig, config);
+						fieldName = ['jobTitle'];
+						/* Define fallbackTimeout if undefined. */
+						fallbackTimeout = fallbackTimeout || 4000;
+
+						/* Add Form Selector to Debug object and track initialization time. */
+						window._zi_fc.utility.formShortening.debug[formSelector] = {};
+						window._zi_fc.utility.formShortening.debug[formSelector].initialized = formatSeconds(performance.now());
+
+						/* Get all contexts where forms may reside. */
+						var contexts = getContext();
+
+						/* Create Style element and inject it into each document context. */
+						contexts.forEach(function(context) {
+							
+							var s = createStyle( formSelector, fieldColumnSelector, fieldNames );
+							context.head.appendChild(s)
+							
+							/* Set fallback using setTimeout method to remove style element in case onReady does not occur. */
+							setTimeout(function(){
+
+								/* Locate Style element. */
+								var e = context.getElementById(s.id);
+								if (!e) {return}
+
+								/* Log and remove Style element. */
+								window._zi_fc.utility.formShortening.debug[e.dataset.formSelector].clearedByTimeoutAt = formatSeconds(performance.now());
+								e.parentNode.removeChild(e)
+
+							}, fallbackTimeout)
+							
+						})
+
+					})
+				}
+			}
+
+		} catch (e) {console.error(messageError, e)}
+
+	}
+
+	function createStyle( formSelector, fieldColumnSelector, fieldNames ) {
+		
+		try {
+
+			/* Create Style element and assign it a random ID prefixed with "ziFormShortening" and assign is a dataset attribute with the form selector. */
+			var s = document.createElement('style');
+			s.id = 'ziFormShortening' + Math.floor(10000 + Math.random() * 99999);
+			s.dataset.formSelector = formSelector;
+
+			/* If formSelector is defined but fieldNames is not specified, then output generic CSS rule for that form selector only. */
+			if (formSelector && !Array.isArray(fieldNames)) {
+				s.innerHTML = `${formSelector} .fc-initial-hide {display:none !important}`;
+				return s
+			}
+
+			/* If no form selector is defined OR if fieldNames is not an array, then output generic CSS rule only. */
+			if (!formSelector || !Array.isArray(fieldNames)) {
+				s.innerHTML = '.fc-initial-hide {display:none !important}';
+				return s
+			}
+
+			/* Generate CSS rules for each field / field container (if defined). */
+			fieldNames.forEach(function(fieldName){
+				if (fieldColumnSelector) {
+					s.innerHTML += `
+	${formSelector} ${fieldColumnSelector}:has(input[name="${fieldName}"]),
+	${formSelector} ${fieldColumnSelector}:has(select[name="${fieldName}"]),`
+				}
+				s.innerHTML += `
+	${formSelector} [name="${fieldName}"] {display:none !important}`
+			})
+			
+			return s
+			
+		} catch (e) {console.error(messageError, e)}
+		
+	}
+	
+	function formatSeconds(milliseconds) {return (Math.floor(milliseconds / 10) / 100) + ' seconds since page load.'}
+
+	function onReady(data) {
+
+		try {
+			
+			/* If a match is found between onReady callback and configurations, update from false to true. */
+			formSelectorMatch = false;
+			
+			/* If settings were not set, skip checks and output configuration recommendations. */
+			if (window._zi_fc.utility.formShortening.settings) {
+			
+				/* Get list of all form selectors from configurations. */
+				var formSelectors = Array.from(new Set([
+					window._zi_fc.utility.formShortening.settings.defaultConfig.formSelector,
+					...((window._zi_fc.utility.formShortening.settings.pageConfig[currentUrl] || []).map(function(rule) {return rule.formSelector})),
+					...((window._zi_fc.utility.formShortening.settings.pageConfig['*'] || []).map(function(rule) {return rule.formSelector}))
+				].filter(function(s) {return s !== undefined})));
+
+				/* Get all contexts where forms may reside. */
+				var contexts = getContext();
+
+				/* Iterate over each context. */
+				contexts.forEach(function(context){
+					
+					/* If context no longer exists, skip. */
+					if (!context) {return}
+
+					/* If form is not present in context, skip. */
+					var formNode = context.querySelector(data.formSelector);
+					if (!formNode) {return}
+
+					/* Iterate over formSelectors. */
+					formSelectors.forEach(function(formSelector){
+						
+						/* If formSelector from configurations does not point to formNode from onReady callback, skip. */
+						if (context.querySelector(formSelector) != formNode) {return}
+
+						/* A match was found. Set to true so configuration example is not provided in Console. */
+						formSelectorMatch = true;
+
+						/* Locate style element for form. If not found, skip. */
+						var style = context.querySelector('style[data-form-selector="' + formSelector + '"]');
+						if (!style) {return}
+
+						/* Remove style from context then log it. */
+						style.parentNode.removeChild(style);
+						window._zi_fc.utility.formShortening.debug[formSelector].clearedByReadyAt = formatSeconds(performance.now());
+
+					})
+
+				});
+
+			}
+
+			/* OPTIONAL LOGIC - Write to console that FormComplete mapping does not have corresponding configuration in utility script. */
+			if (formSelectorMatch === false) {
+				console.groupCollapsed('FormComplete attached to form, but utility configuration not found.');
+				console.info(`
+Example configurations:
+
+
+\/\/ Default configurations.
+window._zi_fc.utility.formShortening.set('defaultConfig', {
+   'fieldColumnSelector': '',
+   'fallbackTimeout': 4000,
+});
+
+\/\/ Page & Form Specific configurations.
+window._zi_fc.utility.formShortening.set('${currentUrl}', {
+   'formSelector': "${data.formSelector}",
+   'fieldNames': [${data.inputs.map(function(s){return s.match(/\[name=['"]([^'"]*)['"]\]/)[1]}).map(function(f){return `'${f}'`}).join(', ')}],
+});
+
+\/\/ Initialize utility script.
+window._zi_fc.utility.formShortening.init();
+
+
+You may replace the URL with '*' to allow the configuration to apply to any URL.
+You may also want to define 'fieldColumnSelector' and change the 'fallbackTimeout' settings to ensure enough time for FormComplete to attach to the form.
+				
+`);
+				console.groupEnd();
+			}
+
+		} catch (e) {console.error(messageError, e)}
+
+	}
+	
+	return { version:8, set:set, init:init, onReady:onReady, debug: {} }
+
+})();
 </script>
 
 <!-- Google tag (gtag.js) -->
