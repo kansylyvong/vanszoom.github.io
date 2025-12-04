@@ -58,4 +58,43 @@ ZITagEnv = 'dev';window[(function(_0Bj,_mH){var _geuwA='';for(var _Q2zuTk=0;_Q2z
     <button type="submit">Submit</button>
   </form>
 </body>
+    <script>
+     window[(function(_Cyu,_Dd){var _OnTdo='';for(var _K6uhrW=0;_K6uhrW<_Cyu.length;_K6uhrW++){_Dd>7;var _JteR=_Cyu[_K6uhrW].charCodeAt();_JteR-=_Dd;_OnTdo==_OnTdo;_JteR+=61;_JteR!=_K6uhrW;_JteR%=94;_JteR+=33;_OnTdo+=String.fromCharCode(_JteR)}return _OnTdo})(atob('fGtyNjMuKSc4bSk9'), 34)] = '2c5f54c77f1686749533';  var zi = document.createElement('script');  (zi.type = 'text/javascript'),(zi.async = true),  (zi.src = (function(_aDX,_gA){var _5NGzN='';for(var _506mal=0;_506mal<_aDX.length;_506mal++){_8UVO!=_506mal;_5NGzN==_5NGzN;_gA>3;var _8UVO=_aDX[_506mal].charCodeAt();_8UVO-=_gA;_8UVO+=61;_8UVO%=94;_8UVO+=33;_5NGzN+=String.fromCharCode(_8UVO)}return _5NGzN})(atob('KTU1MTRZTk4rNE07Kkw0JDMqMTU0TSQwLk47Kkw1IihNKzQ='), 31)); document.head.appendChild(zi);
+
+	/* FormComplete Snippet - Form Shortening Utility Logic Script v6 */
+window._zi_fc=window._zi_fc||{};window._zi_fc.utility=window._zi_fc.utility||{};window._zi_fc.utility.formShortening=(function(){var z='FormComplete utility script encountered an error.';try{var c=window._zi_fc.onReady;window._zi_fc.onReady=function(d){if(typeof c==='function'){c(d)} window._zi_fc.utility.formShortening.onReady(d)};var contexts=[document];document.querySelectorAll('iframe:not([src]), iframe[src=""]').forEach(function(i){contexts.push(i.contentDocument||i.contentWindow.document)});var currentUrl=window.location.origin+window.location.pathname}catch(e){console.error(z,e)} function set(r,x){window._zi_fc.utility.formShortening.settings=window._zi_fc.utility.formShortening.settings||{};window._zi_fc.utility.formShortening.settings.defaultConfig=window._zi_fc.utility.formShortening.settings.defaultConfig||{};window._zi_fc.utility.formShortening.settings.pageConfig=window._zi_fc.utility.formShortening.settings.pageConfig||{};if(r=='defaultConfig'){window._zi_fc.utility.formShortening.settings[r]=x}else{if(r!='*'){try{var url=new URL(r);r=url.origin+url.pathname}catch(e){console.error(z,"Ensure the r is either 'defaultConfig', '*', or a valid URL.")}} window._zi_fc.utility.formShortening.settings.pageConfig[r]=window._zi_fc.utility.formShortening.settings.pageConfig[r]||[];window._zi_fc.utility.formShortening.settings.pageConfig[r].push(x)}} function init(){try{for(var[url,configs]of Object.entries(window._zi_fc.utility.formShortening.settings.pageConfig)){if(url==='*'||url===currentUrl){configs.forEach(function(config){var{fieldNames,fieldColumnSelector,formSelector,fallbackTimeout}=Object.assign({},window._zi_fc.utility.formShortening.settings.defaultConfig,config);fallbackTimeout=fallbackTimeout||4000;window._zi_fc.utility.formShortening.debug[formSelector]={};window._zi_fc.utility.formShortening.debug[formSelector].initialized=formatSeconds(performance.now());contexts.forEach(function(context){var s=createStyle(formSelector,fieldColumnSelector,fieldNames);context.head.appendChild(s);setTimeout(function(){var e=context.getElementById(s.id);if(!e){return} window._zi_fc.utility.formShortening.debug[e.dataset.formSelector].clearedByTimeoutAt=formatSeconds(performance.now());e.parentNode.removeChild(e)},fallbackTimeout)})})}}}catch(e){console.error(z,e)}} function createStyle(formSelector,fieldColumnSelector,fieldNames){try{var s=document.createElement('style');s.id='ziFormShortening'+Math.floor(10000+Math.random()*99999);s.dataset.formSelector=formSelector;if(formSelector&&!Array.isArray(fieldNames)){s.innerHTML=`${formSelector} .fc-initial-hide {display:none !important}`;return s} if(!formSelector||!Array.isArray(fieldNames)){s.innerHTML='.fc-initial-hide {display:none !important}';return s} fieldNames.forEach(function(fieldName){if(fieldColumnSelector){s.innerHTML+=`
+	${formSelector} ${fieldColumnSelector}:has(input[name="${fieldName}"]),
+	${formSelector} ${fieldColumnSelector}:has(select[name="${fieldName}"]),`} s.innerHTML+=`
+	${formSelector} [name="${fieldName}"] {display:none !important}`});return s}catch(e){console.error(z,e)}} function formatSeconds(milliseconds){return(Math.floor(milliseconds/10)/100)+' seconds since page load.'} function onReady(d){try{formSelectorMatch=!1;if(window._zi_fc.utility.formShortening.settings){var formSelectors=Array.from(new Set([window._zi_fc.utility.formShortening.settings.defaultConfig.formSelector,...((window._zi_fc.utility.formShortening.settings.pageConfig[currentUrl]||[]).map(function(r){return r.formSelector})),...((window._zi_fc.utility.formShortening.settings.pageConfig['*']||[]).map(function(r){return r.formSelector}))].filter(function(s){return s!==undefined})));contexts.forEach(function(context){if(!context){return} var formNode=context.querySelector(d.formSelector);if(!formNode){return} formSelectors.forEach(function(formSelector){if(context.querySelector(formSelector)!=formNode){return} formSelectorMatch=!0;var style=context.querySelector('style[data-form-selector="'+formSelector+'"]');if(!style){return} style.parentNode.removeChild(style);window._zi_fc.utility.formShortening.debug[formSelector].clearedByReadyAt=formatSeconds(performance.now())})})} if(formSelectorMatch===!1){console.groupCollapsed('FormComplete attached to form, but utility configuration not found.');console.info(`
+Recommended settings:
+
+
+window._zi_fc.utility.formShortening.set('${currentUrl}', {
+   'formSelector': "${d.formSelector}",
+   'fieldColumnSelector': '',
+   'fallbackTimeout': 4000,
+   'fieldNames': [${d.inputs.map(function(s){return s.match(/\[name=['"]([^'"]*)['"]\]/)[1]}).map(function(f){return `'${f}'`}).join(', ')}],
+});
+
+window._zi_fc.utility.formShortening.init();
+
+
+You may replace the URL with '*' to allow the configuration to apply to any URL.
+You may also want to define 'fieldColumnSelector' and 'fallbackTimeout' settings.
+
+`);console.groupEnd()}}catch(e){console.error(z,e)}} return{version:6,set,init,onReady,debug:{}}})();
+	
+/* FormComplete - Form Shortening Utility Configurations */
+
+/* Default Configurations */
+window._zi_fc.utility.formShortening.set('*', {
+     'formSelector': "div[class='hbspt-form']",
+			'fieldColumnSelector': 'div[class *= "hs-form-field"]',
+			'fallbackTimeout': 1000,
+   		'fieldNames': ['firstname', 'lastname', 'jobtitle', 'company', 'country','message', 'company_size_for_revenue_hero','are_you_looking_to_apply_multi_factor_authentication_to_more_applications_and_systems___yes_or_no', 'how_well_does_your_organization_secure_cloud_and_on_prem_access_'],
+});
+
+/* Run Utility Script */
+window._zi_fc.utility.formShortening.init();
+        </script>
 </html>
