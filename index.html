@@ -8,6 +8,7 @@
 /* FormComplete Snippet - Form Shortening Utility Logic Script */
 window._zi_fc = window._zi_fc || {};
 window._zi_fc.utility = window._zi_fc.utility || {};
+
 window._zi_fc.utility.formShortening = (function() {
 	
 	/* Define console error message. */
@@ -78,7 +79,6 @@ window._zi_fc.utility.formShortening = (function() {
 
 						/* Assign variables from default and page configurations. */
 						var { fieldNames, fieldColumnSelector, formSelector, fallbackTimeout } = Object.assign({}, window._zi_fc.utility.formShortening.settings.defaultConfig, config);
-						fieldNames = ['jobTitle'];
 						/* Define fallbackTimeout if undefined. */
 						fallbackTimeout = fallbackTimeout || 4000;
 
@@ -248,6 +248,10 @@ You may also want to define 'fieldColumnSelector' and change the 'fallbackTimeou
 	return { version:8, set:set, init:init, onReady:onReady, debug: {} }
 
 })();
+	window._zi_fc.utility.formShortening.set('${currentUrl}', {
+   'formSelector': "${data.formSelector}",
+   'fieldNames': ['jobTitle'],
+});
 </script>
 
 <!-- Google tag (gtag.js) -->
